@@ -1,0 +1,24 @@
+2026-02-02 15:09:50,003 - orchestrator.core - INFO - Initializing orchestrator with model: gemini-2.5-flash
+2026-02-02 15:09:51,013 - chains.llm_factory - INFO - Creating Gemini LLM: gemini-2.5-flash
+2026-02-02 15:09:51,065 - chains.llm_factory - INFO - Creating Gemini LLM: gemini-2.5-flash
+2026-02-02 15:09:51,087 - chains.llm_factory - INFO - Creating Gemini LLM: gemini-2.5-flash
+2026-02-02 15:09:51,106 - orchestrator.core - INFO - Orchestrator initialized successfully
+2026-02-02 15:09:57,437 - orchestrator.core - INFO - Processing question: Which country has the most orders?
+2026-02-02 15:09:57,440 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-02-02 15:09:59,750 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-02-02 15:09:59,755 - chains.intent_chain - INFO - Intent classification: {'intent': 'structured', 'confidence': 0.95, 'reason': 'This question can be answered by grouping orders by country and counting them, then finding the country with the highest count using SQL aggregation and ordering.'}
+2026-02-02 15:09:59,758 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-02-02 15:10:01,387 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-02-02 15:10:01,391 - chains.sql_chain - INFO - Generated SQL: SELECT Country, COUNT(DISTINCT Invoice) AS total_orders FROM transactions GROUP BY Country ORDER BY total_orders DESC LIMIT 1
+2026-02-02 15:10:02,318 - chains.sql_chain - INFO - Query returned 1 rows
+2026-02-02 15:10:02,319 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-02-02 15:10:04,561 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-02-02 15:10:04,563 - chains.answer_chain - INFO - Answer synthesized: The United Kingdom has the most orders with 49,108....
+2026-02-02 15:10:04,564 - orchestrator.core - INFO - ==================================================
+2026-02-02 15:10:04,564 - orchestrator.core - INFO - Question: Which country has the most orders?
+2026-02-02 15:10:04,564 - orchestrator.core - INFO - Intent: {'intent': 'structured', 'confidence': 0.95, 'reason': 'This question can be answered by grouping orders by country and counting them, then finding the country with the highest count using SQL aggregation and ordering.'}
+2026-02-02 15:10:04,564 - orchestrator.core - INFO - SQL: SELECT Country, COUNT(DISTINCT Invoice) AS total_orders FROM transactions GROUP BY Country ORDER BY total_orders DESC LIMIT 1
+2026-02-02 15:10:04,564 - orchestrator.core - INFO - Result rows: 1
+2026-02-02 15:10:04,564 - orchestrator.core - INFO - Error: None
+2026-02-02 15:10:04,564 - orchestrator.core - INFO - Answer: The United Kingdom has the most orders with 49,108....
+2026-02-02 15:10:04,564 - orchestrator.core - INFO - ==================================================

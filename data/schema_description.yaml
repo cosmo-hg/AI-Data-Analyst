@@ -1,0 +1,23 @@
+transactions:
+  description: Transaction-level data from an online retail store
+  columns:
+    Invoice:
+      description: Unique invoice identifier
+    StockCode:
+      description: Unique product identifier
+    Description:
+      description: Product name
+    Quantity:
+      description: Number of units sold (can be negative for returns)
+    InvoiceDate:
+      description: Date and time of the transaction
+    Price:
+      description: Price per unit in GBP
+    CustomerID:
+      description: Unique customer identifier (may be null for guest purchases)
+    Country:
+      description: Country of the customer
+  derived_metrics:
+    revenue:
+      formula: Quantity * Price
+      description: Total sale value for the line item. Calculate this in SQL as (Quantity * Price).

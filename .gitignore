@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv
+venv/
+ENV/
+env/
+.env
+
+# Streamlit
+.streamlit/
+
+# Excel/Data (prevent pushing large data files)
+*.xlsx
+*.csv
+archive.zip
+
+# MacOS
+.DS_Store
+
+# Vercel
+.vercel

@@ -1,0 +1,190 @@
+{
+    "metadata": {
+        "description": "Test dataset for AI Data Analyst evaluation",
+        "version": "1.0",
+        "table_name": "data",
+        "schema": {
+            "Rollno": "text",
+            "Name": "text",
+            "Dept": "text",
+            "Email": "text",
+            "Mob": "integer"
+        }
+    },
+    "test_cases": [
+        {
+            "id": 1,
+            "category": "simple_lookup",
+            "difficulty": "easy",
+            "question": "Show me 5 sample records",
+            "expected_sql_pattern": "SELECT.*LIMIT 5",
+            "expected_row_count": 5,
+            "validation_type": "row_count"
+        },
+        {
+            "id": 2,
+            "category": "simple_lookup",
+            "difficulty": "easy",
+            "question": "How many rows are in the data?",
+            "expected_sql_pattern": "SELECT COUNT\\(",
+            "expected_answer_contains": [
+                "1865",
+                "1,865"
+            ],
+            "validation_type": "answer_contains"
+        },
+        {
+            "id": 3,
+            "category": "filter_query",
+            "difficulty": "easy",
+            "question": "Give all details of roll no 22HS10020",
+            "expected_sql_pattern": "WHERE.*Rollno.*22HS10020",
+            "expected_answer_contains": [
+                "Harsh Gupta",
+                "HS"
+            ],
+            "validation_type": "answer_contains"
+        },
+        {
+            "id": 4,
+            "category": "filter_query",
+            "difficulty": "easy",
+            "question": "What is the mobile number of roll no 22AE10046?",
+            "expected_sql_pattern": "SELECT.*Mob.*WHERE.*Rollno",
+            "expected_answer_contains": [
+                "8989467449"
+            ],
+            "validation_type": "answer_contains"
+        },
+        {
+            "id": 5,
+            "category": "filter_query",
+            "difficulty": "easy",
+            "question": "What is the email of 22HS10007?",
+            "expected_sql_pattern": "SELECT.*Email.*WHERE.*Rollno",
+            "expected_row_count": 1,
+            "validation_type": "row_count"
+        },
+        {
+            "id": 6,
+            "category": "aggregation",
+            "difficulty": "medium",
+            "question": "How many students are in the HS department?",
+            "expected_sql_pattern": "COUNT.*WHERE.*Dept.*HS",
+            "validation_type": "execution_success"
+        },
+        {
+            "id": 7,
+            "category": "aggregation",
+            "difficulty": "medium",
+            "question": "Count students by department",
+            "expected_sql_pattern": "COUNT.*GROUP BY.*Dept",
+            "validation_type": "execution_success"
+        },
+        {
+            "id": 8,
+            "category": "aggregation",
+            "difficulty": "medium",
+            "question": "Which department has the most students?",
+            "expected_sql_pattern": "COUNT.*GROUP BY.*ORDER BY.*DESC",
+            "validation_type": "execution_success"
+        },
+        {
+            "id": 9,
+            "category": "unique_values",
+            "difficulty": "easy",
+            "question": "What are the unique departments?",
+            "expected_sql_pattern": "DISTINCT.*Dept|SELECT.*Dept.*GROUP BY",
+            "validation_type": "execution_success"
+        },
+        {
+            "id": 10,
+            "category": "unique_values",
+            "difficulty": "easy",
+            "question": "How many unique departments are there?",
+            "expected_sql_pattern": "COUNT.*DISTINCT.*Dept",
+            "validation_type": "execution_success"
+        },
+        {
+            "id": 11,
+            "category": "filter_query",
+            "difficulty": "medium",
+            "question": "List all students in the AE department",
+            "expected_sql_pattern": "WHERE.*Dept.*AE",
+            "validation_type": "execution_success"
+        },
+        {
+            "id": 12,
+            "category": "pattern_match",
+            "difficulty": "medium",
+            "question": "Find students whose name starts with A",
+            "expected_sql_pattern": "WHERE.*Name.*LIKE.*A%|WHERE.*Name.*GLOB",
+            "validation_type": "execution_success"
+        },
+        {
+            "id": 13,
+            "category": "unsupported",
+            "difficulty": "edge_case",
+            "question": "What is the weather today?",
+            "expected_intent": "unsupported",
+            "validation_type": "intent_classification"
+        },
+        {
+            "id": 14,
+            "category": "unsupported",
+            "difficulty": "edge_case",
+            "question": "Tell me about ChatGPT",
+            "expected_intent": "unsupported",
+            "validation_type": "intent_classification"
+        },
+        {
+            "id": 15,
+            "category": "unsupported",
+            "difficulty": "edge_case",
+            "question": "What is the total revenue?",
+            "expected_intent": "unsupported",
+            "validation_type": "intent_classification"
+        },
+        {
+            "id": 16,
+            "category": "complex_query",
+            "difficulty": "hard",
+            "question": "Show students from HS department with mobile numbers starting with 9",
+            "expected_sql_pattern": "WHERE.*Dept.*HS.*AND.*Mob.*LIKE.*9%",
+            "validation_type": "execution_success"
+        },
+        {
+            "id": 17,
+            "category": "ordering",
+            "difficulty": "medium",
+            "question": "List students sorted by name alphabetically",
+            "expected_sql_pattern": "ORDER BY.*Name",
+            "validation_type": "execution_success"
+        },
+        {
+            "id": 18,
+            "category": "limit_query",
+            "difficulty": "easy",
+            "question": "Show the first 10 students",
+            "expected_sql_pattern": "LIMIT 10",
+            "expected_row_count": 10,
+            "validation_type": "row_count"
+        },
+        {
+            "id": 19,
+            "category": "existence_check",
+            "difficulty": "medium",
+            "question": "Is there a student with roll number 22HS10001?",
+            "expected_sql_pattern": "WHERE.*Rollno.*22HS10001",
+            "validation_type": "execution_success"
+        },
+        {
+            "id": 20,
+            "category": "column_query",
+            "difficulty": "easy",
+            "question": "List all roll numbers",
+            "expected_sql_pattern": "SELECT.*Rollno",
+            "validation_type": "execution_success"
+        }
+    ]
+}
